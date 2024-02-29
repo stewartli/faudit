@@ -1,0 +1,17 @@
+---
+title: "R data cleaning"
+format: html
+---
+
+
+backtick confict in vscode. vim vs quarto?  
+
+```{r}
+library(dplyr)
+head(mtcars)
+cat("hello from report/report.qmd\n")
+```
+
+
+
+
