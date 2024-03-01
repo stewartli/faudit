@@ -7,7 +7,7 @@ use std::{
 use crate::precheck::check_r_py;
 use crate::util::write_yml;
 
-pub fn init() -> Result<(), std::io::Error> {
+pub fn init() -> anyhow::Result<()> {
     // don't init again
     if env::var("USER_FA_DIR").is_ok() {
         eprintln!("✘ faproj root already exists");
@@ -45,7 +45,7 @@ pub fn init() -> Result<(), std::io::Error> {
 }
 
 // copy the content of box.R
-fn copy_box(des: &PathBuf) -> Result<(), std::io::Error> {
+fn copy_box(des: &PathBuf) -> anyhow::Result<()> {
     let ctx = include_str!("../temp/box.R");
     fs::write(des, ctx)?;
     Ok(())

@@ -29,7 +29,7 @@ pub fn rstudio() {
 }
 
 // quarto render repot.qmd
-pub fn qrender(client: &str, year: &str, activity: String, ide: bool) -> std::io::Result<()> {
+pub fn qrender(client: &str, year: &str, activity: String, ide: bool) -> anyhow::Result<()> {
     // get job/client/year/report/report.qmd
     let path_proj = check_proj_home().unwrap();
     let path_proj_conf = path_proj.join("config.json");

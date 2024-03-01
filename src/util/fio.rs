@@ -10,7 +10,7 @@ use std::{
 };
 
 // write config.yml
-pub fn write_yml(path_stbox: &PathBuf, path_box_yml: &PathBuf) -> Result<(), std::io::Error> {
+pub fn write_yml(path_stbox: &PathBuf, path_box_yml: &PathBuf) -> anyhow::Result<()> {
     // specify my yaml format
     let mut field = HashMap::new();
     field.insert("rbox".to_string(), path_stbox.to_str().unwrap().to_string());
@@ -58,7 +58,7 @@ pub fn write_json(
     path_proj_config: &PathBuf,
     activity: String,
     record: &mut Configjsonlist,
-) -> Result<(), std::io::Error> {
+) -> anyhow::Result<()> {
     // push new ctx to a clean json format without \\ string character
     let mut ctx_json = json!({"item": record.item});
     ctx_json["item"].as_array_mut().unwrap().push(json!({
@@ -80,7 +80,7 @@ pub fn write_json(
     Ok(())
 }
 
-pub fn read_json(path_proj_conf: &PathBuf) -> Result<Configjsonlist, std::io::Error> {
+pub fn read_json(path_proj_conf: &PathBuf) -> anyhow::Result<Configjsonlist> {
     if fs::metadata(path_proj_conf).unwrap().len() == 0 {
         // init a vector if config.json is empty
         Ok(Configjsonlist { item: Vec::new() })

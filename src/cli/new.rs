@@ -5,7 +5,7 @@ use std::{fs, path::PathBuf};
 use crate::precheck::rstudio;
 use crate::util::{read_json, write_json};
 
-pub fn new(client: &str, year: &str, activity: String, ide: bool) -> Result<(), std::io::Error> {
+pub fn new(client: &str, year: &str, activity: String, ide: bool) -> anyhow::Result<()> {
     // create faproj/job/client/year
     let path_proj = check_proj_home().unwrap();
     let path_proj_conf = path_proj.join("config.json");
@@ -65,7 +65,7 @@ pub fn check_proj_home() -> Option<PathBuf> {
 }
 
 // create job/client/year/awp folder
-fn create_audit_folder(path_job: &PathBuf) -> Result<(), std::io::Error> {
+fn create_audit_folder(path_job: &PathBuf) -> anyhow::Result<()> {
     let path_pbc = path_job.join("pbc");
     let path_awp = path_job.join("awp");
     let path_report = path_job.join("report");
@@ -80,7 +80,7 @@ fn create_audit_folder(path_job: &PathBuf) -> Result<(), std::io::Error> {
 }
 
 // copy assets to job/client/year folder
-fn copy_include() -> Result<(), std::io::Error> {
+fn copy_include() -> anyhow::Result<()> {
     fs::File::create("awp/clean.R")?;
     let ctx_clean = include_str!("../temp/clean.R");
     fs::write("awp/clean.R", ctx_clean)?;

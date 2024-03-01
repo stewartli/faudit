@@ -8,7 +8,7 @@ pub use cli::CliArgs;
 
 impl cli::CliArgs {
     // for main.rs
-    pub fn run() -> Result<(), std::io::Error> {
+    pub fn run() -> anyhow::Result<()> {
         let cmd = cli::CliArgs::parse();
         match cmd.command {
             Some(cli::Audit::Init) => cli::init()?,

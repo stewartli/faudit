@@ -1,6 +1,6 @@
 use faudit;
 
-fn main() -> Result<(), std::io::Error> {
+fn main() -> anyhow::Result<()> {
     faudit::CliArgs::run()?;
     Ok(())
 }
