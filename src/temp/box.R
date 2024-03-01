@@ -11,13 +11,13 @@ check_r_pkg <- function() {
         "DBI", "data.table", "tidyverse", "pointblank", "gt", "shiny", "quarto", "renv", "target",
         "devtools", "usethis", "fusen", "pak", "cli"
     )
-    needed <- setdiff(deps, rownames(installed.packages()))
+    needed <- setdiff(deps, rownames(utils::installed.packages()))
     if (length(needed) == 0) {
         cat("✔ you are good now")
     } else {
-        answer <- askYesNo("Do you want to install all?")
+        answer <- utils::askYesNo("Do you want to install all?")
         if (!is.na(answer) && answer) {
-            install.packages(needed)
+            utils::install.packages(needed)
         } else {
             cat("✘ you need to install missing packages")
         }
